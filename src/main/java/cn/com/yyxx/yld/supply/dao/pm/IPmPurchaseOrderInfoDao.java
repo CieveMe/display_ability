@@ -11,7 +11,7 @@ public interface IPmPurchaseOrderInfoDao extends BaseMapper<PmPurchaseOrderInfo>
      * <P>
      *     根据Id查询采购订单
      * </P>
-     * @author liujun
+     * @author hz
      * @date 2021/2/6 17:27
      * @param poiId ID
     * @param poiIsIn 是否入库

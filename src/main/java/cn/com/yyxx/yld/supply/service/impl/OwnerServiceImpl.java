@@ -1,23 +1,19 @@
 package cn.com.yyxx.yld.supply.service.impl;
 
 import cn.com.yyxx.yld.supply.action.BaseResultResponse;
-import cn.com.yyxx.yld.supply.data.vo.OwnerOrderVo;
-import cn.com.yyxx.yld.supply.exception.NotExceptException;
-import cn.com.yyxx.yld.supply.manager.user.IApiUserGrantInfoManager;
-import cn.com.yyxx.yld.supply.manager.org.ISysSmStoreBasicInfoManager;
-import cn.com.yyxx.yld.supply.core.WxMpTemplateMessageProperties;
 import cn.com.yyxx.yld.supply.data.qo.WxMpTemplateMessageQo;
+import cn.com.yyxx.yld.supply.data.vo.OwnerOrderVo;
 import cn.com.yyxx.yld.supply.data.vo.SmStoreBasicInfoVO;
 import cn.com.yyxx.yld.supply.entity.sm.SmMerchantProductSaleOrder;
+import cn.com.yyxx.yld.supply.exception.NotExceptException;
+import cn.com.yyxx.yld.supply.manager.org.ISysSmStoreBasicInfoManager;
+import cn.com.yyxx.yld.supply.manager.user.IApiUserGrantInfoManager;
 import cn.com.yyxx.yld.supply.service.IOwnerService;
 import cn.com.yyxx.yld.supply.service.sm.IStoreUploadMerchantProductSaleOrderService;
-import cn.com.yyxx.yld.supply.staticMap.StaticDataDef;
-import cn.com.yyxx.yld.supply.util.HttpSend;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jodd.util.StringUtil;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -36,7 +32,7 @@ import java.util.Map;
  * 用户积分处理
  * </p>
  *
- * @author liujun
+ * @author hz
  * @version 0.17.0
  * @date 2021/01/13 21:26
  **/
@@ -97,14 +93,14 @@ public class OwnerServiceImpl implements IOwnerService {
      * <P>
      *     组装微信消息模板
      * </P>
-     * @author liujun
+     * @author hz
      * @date 2021/1/14 10:59
      * @param ugiOnly openid
      * @param saleOrder 销售订单
      * @return cn.com.yyxx.yld.supply.data.qo.WxMpTemplateMessageQo
      * @since 2021/01/13 21:26
      */
-    private WxMpTemplateMessageQo initWxTempMessageQo(String ugiOnly, SmMerchantProductSaleOrder saleOrder, Integer typeId,Integer cancelOrderData,String refundMethod) {
+    private WxMpTemplateMessageQo initWxTempMessageQo(String ugiOnly, SmMerchantProductSaleOrder saleOrder, Integer typeId, Integer cancelOrderData, String refundMethod) {
         WxMpTemplateMessageQo messageQo = new WxMpTemplateMessageQo();
         messageQo.setToUser(ugiOnly);
         messageQo.setUrl("/member/mp/order/code_skip/" + saleOrder.getMpsoSbiId() + "/" + saleOrder.getMpsoOrderNo()+ "/" + cancelOrderData + "/" +refundMethod+ "/" +1);
@@ -183,7 +179,7 @@ public class OwnerServiceImpl implements IOwnerService {
      * <P>
      *     发送消息
      * </P>
-     * @author liujun
+     * @author hz
      * @date 2021/1/14 10:59
      * @param messageQo
      * @return cn.com.yyxx.model.core.BaseResultResponse<java.lang.Boolean>

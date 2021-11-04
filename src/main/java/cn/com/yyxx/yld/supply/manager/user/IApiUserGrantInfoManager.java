@@ -16,7 +16,7 @@ import java.util.Map;
  *
  * </p>
  *
- * @author linmeng
+ * @author hz
  * @version 1.0
  * @since 2019/1/23 15:54
  */
@@ -30,7 +30,7 @@ public interface IApiUserGrantInfoManager {
      * @param storeIds 门店id list
      * @param sddCode 授权类型sddCode
      * @return java.util.List<cn.com.yyxx.yld.uim.data.vo.user.UmUserGrantInfoVO>
-     * @author linmeng
+     * @author hz
      * @since 2019/3/9 14:51
      */
     @RequestMapping(value = "/api/user/grant/list_by_store_list",method = RequestMethod.POST)
@@ -45,7 +45,7 @@ public interface IApiUserGrantInfoManager {
      * @param userNos 用户编号list
      * @param storeId 门店id
      * @return cn.com.yyxx.model.core.BaseResultResponse<cn.com.yyxx.yld.uim.data.vo.user.SimpleUserInfoVO>
-     * @author linmeng
+     * @author hz
      * @since 2019/2/14 11:58
      */
     @RequestMapping(value = "/api/user/list",method = RequestMethod.POST)

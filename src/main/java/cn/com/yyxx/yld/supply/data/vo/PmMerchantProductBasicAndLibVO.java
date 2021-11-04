@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  *  商家商品和标准商品信息
  * </p>
  *
- * @author linmeng
+ * @author hz
  * @version 1.0
  * @since 2019/2/27 17:40
  */

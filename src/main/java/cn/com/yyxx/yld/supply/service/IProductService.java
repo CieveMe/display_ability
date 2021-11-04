@@ -2,7 +2,6 @@ package cn.com.yyxx.yld.supply.service;
 
 import cn.com.yyxx.yld.supply.data.vo.RidesOrderCancelVO;
 import cn.com.yyxx.yld.supply.data.vo.RidesOrderVO;
-import cn.com.yyxx.yld.supply.data.vo.UserWithPermissionVO;
 import cn.com.yyxx.yld.supply.entity.sm.SmMerchantProductSaleItem;
 
 import java.util.List;
@@ -28,7 +27,7 @@ public interface IProductService {
      * @since 2020/11/30 20:50
      */
     void saleChangeProduct(RidesOrderVO ridesOrder,
-        List<SmMerchantProductSaleItem> productSaleItems);
+                           List<SmMerchantProductSaleItem> productSaleItems);
 
     /**
      * <p>
@@ -40,7 +39,7 @@ public interface IProductService {
      * @since 2020/11/30 20:50
      */
     void saleRefundProduct(RidesOrderCancelVO ridesOrder,
-        List<SmMerchantProductSaleItem> productSaleItems);
+                           List<SmMerchantProductSaleItem> productSaleItems);
 
     /**
      * <p>
@@ -52,6 +51,6 @@ public interface IProductService {
      * @since 2020/11/30 20:50
      */
     void saleNewRefundProduct(RidesOrderCancelVO ridesOrder,
-                           List<SmMerchantProductSaleItem> productSaleItems);
+                              List<SmMerchantProductSaleItem> productSaleItems);
 
 }

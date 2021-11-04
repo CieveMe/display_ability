@@ -43,7 +43,7 @@ public interface ISysSmStoreBasicInfoManager {
      * @param cdKey   激活码
      * @param message 不通过原因
      * @return cn.com.yyxx.model.core.BaseResultResponse<java.lang.Boolean>
-     * @author linmeng
+     * @author hz
      * @since 2018/12/26 9:10
      */
     @RequestMapping(value = "/system/store/review", method = RequestMethod.PUT)
@@ -59,7 +59,7 @@ public interface ISysSmStoreBasicInfoManager {
      *
      * @param storeId 门店id
      * @return cn.com.yyxx.model.core.BaseResultResponse<java.lang.Boolean>
-     * @author linmeng
+     * @author hz
      * @since 2018/12/26 9:54
      */
     @RequestMapping(value = "/system/store/cancel", method = RequestMethod.PUT)
@@ -72,7 +72,7 @@ public interface ISysSmStoreBasicInfoManager {
      *
      * @param storeId 门店id
      * @return cn.com.yyxx.model.core.BaseResultResponse<java.lang.Boolean>
-     * @author linmeng
+     * @author hz
      * @since 2018/12/26 9:54
      */
     @RequestMapping(value = "/system/store/recover", method = RequestMethod.PUT)
@@ -164,7 +164,7 @@ public interface ISysSmStoreBasicInfoManager {
      *
      * @param id 门店id
      * @return cn.com.yyxx.model.core.BaseResultResponse<java.lang.Boolean>
-     * @author linmeng
+     * @author hz
      * @since 2019/1/4 20:50
      */
     @RequestMapping(value = "/system/store/{id}", method = RequestMethod.DELETE)
@@ -177,7 +177,7 @@ public interface ISysSmStoreBasicInfoManager {
      *
      * @param ids 门店id集合
      * @return cn.com.yyxx.model.core.BaseResultResponse<java.lang.Boolean>
-     * @author linmeng
+     * @author hz
      * @since 2019/1/4 21:18
      */
     @RequestMapping(value = "/system/store/batch", method = RequestMethod.DELETE)
@@ -252,7 +252,7 @@ public interface ISysSmStoreBasicInfoManager {
      *
      * @param sbiId 门店id
      * @return java.lang.Boolean
-     * @author linmeng
+     * @author hz
      * @date 2019/9/2 15:37
      */
     @RequestMapping(value = "/system/store/send_image_code/{sbiId}", method = RequestMethod.GET)
@@ -265,7 +265,7 @@ public interface ISysSmStoreBasicInfoManager {
      *
      * @param sbiId 门店id
      * @return java.lang.Boolean
-     * @author linmeng
+     * @author hz
      * @date 2019/9/4 18:20
      */
     @RequestMapping(value = "/system/store/send_mch_edit_info/{sbiId}", method = RequestMethod.GET)
@@ -306,7 +306,7 @@ public interface ISysSmStoreBasicInfoManager {
      *
      * @param sbiId 门店ID
      * @return cn.com.yyxx.model.core.BaseResultResponse<java.lang.Boolean>
-     * @author linmeng
+     * @author hz
      * @date 2019/11/25 14:45
      */
     @RequestMapping(value = "/system/store/again/sign/in/{sbiId}", method = RequestMethod.GET)
@@ -319,7 +319,7 @@ public interface ISysSmStoreBasicInfoManager {
      *
      * @param ssiId 服务ID
      * @return cn.com.yyxx.model.core.BaseResultResponse<java.lang.Boolean>
-     * @author linmeng
+     * @author hz
      * @date 2019/11/26 9:20
      */
     @RequestMapping(value = "/system/store/sign/query/nmrs/status/{ssiId}", method = RequestMethod.GET)
@@ -332,7 +332,7 @@ public interface ISysSmStoreBasicInfoManager {
      *
      * @param jobId 任务ID
      * @return String
-     * @author linmeng
+     * @author hz
      * @date 2019/11/29 16:26
      */
     @RequestMapping(value = "/system/store/flowable/re/execute/job/{jobId}", method = RequestMethod.GET)

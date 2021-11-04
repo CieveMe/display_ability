@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
  * 订单被扫交易结果记录表
  * </p>
  *
- * @author linmeng
+ * @author hz
  * @since 2019-03-05
  */
 @Data

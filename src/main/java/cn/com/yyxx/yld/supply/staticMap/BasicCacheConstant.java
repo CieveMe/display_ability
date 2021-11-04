@@ -5,7 +5,7 @@ package cn.com.yyxx.yld.supply.staticMap;
  * 基础模块缓存名
  * </p>
  *
- * @author linmeng
+ * @author hz
  * @since 2018/12/24 17:49
  */
 public class BasicCacheConstant {

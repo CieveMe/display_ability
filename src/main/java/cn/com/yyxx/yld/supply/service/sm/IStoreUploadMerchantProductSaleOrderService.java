@@ -42,7 +42,7 @@ public interface IStoreUploadMerchantProductSaleOrderService {
      * @date 2020/12/9 15:27
      * @since 0.16.0
      */
-    OrderCallBackVO saveOrder(SmMerchantProductSaleOrderVO order, UserWithPermissionVO userInfo,String serialNum, String userNo, String termIp,String hsm);
+    OrderCallBackVO saveOrder(SmMerchantProductSaleOrderVO order, UserWithPermissionVO userInfo, String serialNum, String userNo, String termIp, String hsm);
 
     /**
      * <p>

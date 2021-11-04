@@ -25,7 +25,7 @@ public interface ISmOrderTransCodeResultDao extends BaseMapper<SmOrderTransCodeR
      *
      * @param nos 编号list
      * @return java.util.List<cn.com.yyxx.yld.scm.entity.sm.SmOrderTransCodeResult>
-     * @author linmeng
+     * @author hz
      * @since 2019/2/14 17:37
      */
     List<SmOrderTransCodeResult> listByNos(@Param("nos") List<String> nos);

@@ -21,11 +21,8 @@ import cn.com.yyxx.yld.supply.manager.productv2.IProductV2Manager;
 import cn.com.yyxx.yld.supply.redis.RedisUtil;
 import cn.com.yyxx.yld.supply.service.ISalesOrderService;
 import cn.com.yyxx.yld.supply.staticMap.PayStatusCode;
-import cn.com.yyxx.yld.supply.staticMap.StaticDataDef;
-import cn.com.yyxx.yld.supply.staticMap.UnitStaticDataDef;
 import cn.com.yyxx.yld.supply.util.ConvertUtil;
 import cn.com.yyxx.yld.supply.util.MoneyUtil;
-import cn.com.yyxx.yld.supply.util.TimeUtil;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
@@ -54,7 +51,7 @@ import java.util.stream.Collectors;
  * 销售订单操作实现
  * </p>
  *
- * @author liujun
+ * @author hz
  * @version 0.17.0
  * @date 2021/01/15 14:39
  **/
@@ -1232,7 +1229,7 @@ public class SalesOrderServiceImpl implements ISalesOrderService {
     }
 
 
-    private Integer saveProductSaleOrderCancelData(SmMerchantProductSaleOrder oldOrder,List<SmMerchantProductSaleItem> saleAllItems) {
+    private Integer saveProductSaleOrderCancelData(SmMerchantProductSaleOrder oldOrder, List<SmMerchantProductSaleItem> saleAllItems) {
 
         SmMerchantProductSaleOrderCancel orderCancel = new SmMerchantProductSaleOrderCancel();
         orderCancel.setMpsoCancelOrderId(oldOrder.getMpsoId()).

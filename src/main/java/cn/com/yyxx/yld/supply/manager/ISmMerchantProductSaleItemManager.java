@@ -24,7 +24,7 @@ public interface ISmMerchantProductSaleItemManager extends IService<SmMerchantPr
      *
      * @param nos 品项编号list
      * @return cn.com.yyxx.yld.scm.entity.sm.SmMerchantProductSaleItem
-     * @author linmeng
+     * @author hz
      * @since 2019/2/14 15:44
      */
     List<SmMerchantProductSaleItem> listByNos(List<String> nos);
@@ -50,7 +50,7 @@ public interface ISmMerchantProductSaleItemManager extends IService<SmMerchantPr
      *
      * @param mpsoId 订单id
      * @return java.util.List<cn.com.yyxx.yld.scm.entity.sm.SmMerchantProductSaleItem>
-     * @author linmeng
+     * @author hz
      * @date 2019/9/23 14:54
      */
     List<SmMerchantProductSaleItem> listByMpsoId(Long mpsoId);

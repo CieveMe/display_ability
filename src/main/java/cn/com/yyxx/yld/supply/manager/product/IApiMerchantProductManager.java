@@ -14,7 +14,7 @@ import java.util.List;
  *
  * </p>
  *
- * @author linmeng
+ * @author hz
  * @version 1.0
  * @since 2019/2/14 17:13
  */
@@ -28,7 +28,7 @@ public interface IApiMerchantProductManager {
      * @param nos 商家商品编号list
      * @param storeId 门店id
      * @return cn.com.yyxx.model.core.BaseResultResponse<java.util.List<cn.com.yyxx.yld.pim.data.vo.PmMerchantProductBasicInfoVO>>
-     * @author linmeng
+     * @author hz
      * @since 2019/2/14 16:43
      */
     @RequestMapping(value = "/api/merchant/product/list",method = RequestMethod.POST)
@@ -40,7 +40,7 @@ public interface IApiMerchantProductManager {
      * @param ids 商家商品编号list
      * @param mpbiSbiId 门店id
      * @return cn.com.yyxx.model.core.BaseResultResponse<java.util.List<cn.com.yyxx.yld.pim.data.vo.PmMerchantProductBasicInfoVO>>
-     * @author linmeng
+     * @author hz
      * @since 2019/2/14 16:43
      */
     @PostMapping(value = "/system/store/product/get_no_by_id")
@@ -52,7 +52,7 @@ public interface IApiMerchantProductManager {
      * @param ids 商家商品编号list
      * @param sbiid 门店id
      * @return cn.com.yyxx.model.core.BaseResultResponse<java.util.List<cn.com.yyxx.yld.pim.data.vo.BasicInfoIdAndNoVO>>
-     * @author liujun
+     * @author hz
      * @since 2021 /02/06 17:11
      */
     @PostMapping(value = "/system/store/product/get_no_by_pislid_sbiid")

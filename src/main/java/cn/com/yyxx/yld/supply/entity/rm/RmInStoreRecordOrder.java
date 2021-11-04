@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
  * 入库记录单
  * </p>
  *
- * @author linmeng
+ * @author hz
  * @since 2019-02-26
  */
 @Data

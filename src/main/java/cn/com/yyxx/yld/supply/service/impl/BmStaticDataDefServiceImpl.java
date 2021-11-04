@@ -1,8 +1,6 @@
 package cn.com.yyxx.yld.supply.service.impl;
 
 import cn.com.yyxx.yld.supply.data.vo.StaticDataDefVO;
-import cn.com.yyxx.yld.supply.manager.IBmStaticDataDefManager;
-import cn.com.yyxx.yld.supply.service.IBmStaticDataDefService;
 import cn.com.yyxx.yld.supply.staticMap.BasicCacheConstant;
 import cn.com.yyxx.yld.supply.util.ConvertUtil;
 import org.springframework.beans.factory.annotation.Autowired;

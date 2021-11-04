@@ -17,10 +17,7 @@ import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.http.Method;
-import com.alibaba.fastjson.JSON;
-import java.util.ArrayList;
 import org.apache.commons.lang3.StringUtils;
-import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +36,7 @@ import static cn.com.yyxx.yld.supply.messaging.AddPointSource.YLD_ADD_POINT_OUT_
  *     用户积分处理
  * </p>
  *
- * @author liujun
+ * @author hz
  * @version 0.17.0
  * @date 2021/01/13 21:26
  **/
@@ -50,7 +47,7 @@ public class MemberServiceImpl implements IMemberService {
 
     @Override
     public void sendCashOrderSuccessMessage(SmMerchantProductSaleOrder saleOrder,
-                                        List<SmMerchantProductSaleItem> productSaleItems) {
+                                            List<SmMerchantProductSaleItem> productSaleItems) {
 
         if (saleOrder != null && (StringUtils.isNotBlank(saleOrder.getMpsoThirdBuyerId())||saleOrder.getMpsoSmiPhone()!=null)) {
             saleOrder.setItems(productSaleItems);

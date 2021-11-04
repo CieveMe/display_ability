@@ -1,17 +1,9 @@
 package cn.com.yyxx.yld.supply.service.sm.impl;
 
-import static cn.com.yyxx.yld.supply.messaging.pay.OrderSaveSource.YLD_ORDER_SAVE_OUT_PUT;
-
 import cn.com.yyxx.yld.supply.action.BaseResultResponse;
 import cn.com.yyxx.yld.supply.config.SmwConfig;
 import cn.com.yyxx.yld.supply.config.YqUrlConfig;
-import cn.com.yyxx.yld.supply.data.vo.BasicInfoIdAndNoVO;
-import cn.com.yyxx.yld.supply.data.vo.OrderCallBackVO;
-import cn.com.yyxx.yld.supply.data.vo.OwnerOrderVo;
-import cn.com.yyxx.yld.supply.data.vo.RidesOrderVO;
-import cn.com.yyxx.yld.supply.data.vo.SmMerchantProductSaleItemVO;
-import cn.com.yyxx.yld.supply.data.vo.SmMerchantProductSaleOrderVO;
-import cn.com.yyxx.yld.supply.data.vo.UserWithPermissionVO;
+import cn.com.yyxx.yld.supply.data.vo.*;
 import cn.com.yyxx.yld.supply.entity.sm.SmMerchantProductSaleOrder;
 import cn.com.yyxx.yld.supply.exception.NotExceptException;
 import cn.com.yyxx.yld.supply.manager.ISmMerchantProductSaleItemManager;
@@ -24,13 +16,6 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import javax.annotation.Resource;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +24,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import static cn.com.yyxx.yld.supply.messaging.pay.OrderSaveSource.YLD_ORDER_SAVE_OUT_PUT;
 
 /**
  * <p>
@@ -105,7 +99,7 @@ public class StoreUploadMerchantProductSaleOrderServiceImpl implements IStoreUpl
 
     @Override
     public OrderCallBackVO saveOrder(SmMerchantProductSaleOrderVO order, UserWithPermissionVO userInfo,
-        String serialNum, String userNo, String termIp,String hsm) {
+                                     String serialNum, String userNo, String termIp, String hsm) {
 
         log.info("C扫B上传订单---->{}", order);
         OrderCallBackVO backVO = new OrderCallBackVO();

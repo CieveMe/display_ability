@@ -1,18 +1,13 @@
 package cn.com.yyxx.yld.supply.manager.impl;
 
 
-import cn.com.yyxx.yld.supply.core.CancelBackProperties;
 import cn.com.yyxx.yld.supply.core.PayFactoryProperties;
 import cn.com.yyxx.yld.supply.data.vo.*;
-import cn.com.yyxx.yld.supply.entity.sm.SmMerchantProductSaleOrder;
 import cn.com.yyxx.yld.supply.manager.IPaymentCenterManger;
 import cn.com.yyxx.yld.supply.manager.paymentcenter.PaymentCenterFeign;
 import cn.com.yyxx.yld.supply.manager.supervip.SuperVIPFeign;
-import cn.com.yyxx.yld.supply.redis.RedisUtil;
-import cn.com.yyxx.yld.supply.staticMap.StaticDataDef;
 import cn.com.yyxx.yld.supply.util.MoneyUtil;
 import cn.com.yyxx.yld.supply.util.PayUtil;
-import cn.hutool.core.util.IdUtil;
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -20,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +25,7 @@ import java.util.Map;
  *
  * </p>
  *
- * @author linmeng
+ * @author hz
  * @version 1.0
  * @date 2020/4/28 8:58
  * @since 0.11.0
@@ -42,8 +36,6 @@ public class PaymentCenterMangerImpl implements IPaymentCenterManger {
     private Logger log = LoggerFactory.getLogger(PaymentCenterMangerImpl.class);
     private static final String PAY_B_C = "PayB_C";
     private static final String SEARCH_B_C = "SearchB_C";
-    private static final String CANCEL_B_C = "CancelB_C";
-    private static final String RefundB_C = "RefundB_C";
 
     @Override
     public ResponsePayVO b2cPay(SmMerchantProductSaleOrderVO order, Integer sbiId, String termIp, String paySource) {
@@ -66,10 +58,6 @@ public class PaymentCenterMangerImpl implements IPaymentCenterManger {
         data.setDescription("被扫支付");
         //门店ID
         data.setStoreId(sbiId);
-        //异步支付回调地址
-        data.setNotifyUrl(payFactoryProperties.getReturnNotifyUrl());
-        //异步openid回调地址
-        data.setNotifyOpenId(payFactoryProperties.getReturnNotifyOpenId());
         //终端(POS)IP
         data.setTermIp(termIp);
         RequestPayVO body = new RequestPayVO();
@@ -136,14 +124,12 @@ public class PaymentCenterMangerImpl implements IPaymentCenterManger {
         if (order.getMpsoAmountRatio() != null){
             amountRatioLong = order.getMpsoAmountRatio().multiply(new BigDecimal(100)).longValue();
         }
-//        Long amountRatioLong = order.getMpsoAmountRatio().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).longValue();
         orderInfo.setIntegralDiscountAmount(amountRatioLong);
 //        实际交易金额(分)
         orderInfo.setRealAmount(order.getMpsoActualPrice().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).longValue());
         //orderInf中超级会员卡号
         orderInfo.setCardNo(order.getPayCode().substring(3));
         //超级会员优惠金额
-//        long vipAmount = Long.parseLong(order.getVipAmount().substring(0,order.getVipAmount().indexOf(".")+1));
         long vipAmount = 0;
         if (order.getVipAmount() != null){
             vipAmount = new BigDecimal(order.getVipAmount()).multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).longValue();
@@ -152,7 +138,6 @@ public class PaymentCenterMangerImpl implements IPaymentCenterManger {
         long vipDiscount = 10000;
         if (order.getVipDiscount() != null){
             vipDiscount = (long)(Double.parseDouble(order.getVipDiscount()) * 100);
-//            vipDiscount = new BigDecimal(order.getVipDiscount()).multiply(new BigDecimal(100)).longValue();
         }
         //门店折扣优惠金额（不包含门店积分抵扣金额）
         long storeDiscountAmount =discountAmount - amountRatioLong - vipAmount;
@@ -175,8 +160,6 @@ public class PaymentCenterMangerImpl implements IPaymentCenterManger {
             currOrderItem.setTradeName(orderItem.getMpsiName());
             currOrderItem.setTradeAmount(orderItem.getMpsiNowPrice().multiply(new BigDecimal(100)).stripTrailingZeros().toPlainString());
             currOrderItem.setTradeCount(orderItem.getMpsiNum().toPlainString());
-            //通过订单拿到unit的code 在查库拿出人看懂的单位名称
-//            System.out.println("===============单位ID================="+JSON.toJSONString(orderItem));
             StaticDataDef unitStatic = StaticDataDef.findBySddId(orderItem.getMpsiUnit());
             currOrderItem.setTradeUnit(unitStatic.getSddName());
             currOrderItem.setTradeSize(orderItem.getMpsiSize());
@@ -187,42 +170,6 @@ public class PaymentCenterMangerImpl implements IPaymentCenterManger {
         superVIPRequestPayVO.setOrderInfo(orderInfo);
     }
 
-    @Override
-    public ResponsePayVO cancel(String orderNo, Integer sbiId, String paySource) {
-        RequestCancelPayVO data = new RequestCancelPayVO();
-        //Redis取值
-        String ridesOrderObject = redisUtil.get(orderNo).toString();
-        RidesOrderCancelVO ridesOrder = JSON.parseObject(ridesOrderObject, RidesOrderCancelVO.class);
-        SmMerchantProductSaleOrder saleOrder = ridesOrder.getOrder();
-        data.setProtocol(RefundB_C);
-        RequestCancelPayVO.RequestCancelPayOrder order = new RequestCancelPayVO.RequestCancelPayOrder();
-        //支付来源
-        order.setPaySource(paySource);
-        //业务类型
-        order.setBusinessType(PAY_BY_POS);
-        order.setOrderId(saleOrder.getMpsoOrderNo());
-        order.setStoreId(sbiId);
-        // 原订单金额
-        Long actualPriceLong = saleOrder.getMpsoActualPrice().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).longValue();
-        order.setAmount(actualPriceLong);
-        order.setPayTime(saleOrder.getMpsoPayTime());
-        order.setOrderNo(saleOrder.getMpsoSingleNo());
-        order.setDescription("被扫支付");
-        //原交易返回的平台订单号
-        order.setTradeNo(saleOrder.getMpsoPayOrderId());
-        //回调地址
-        order.setNotifyUrl(cancelBackProperties.getRefund());
-        order.setRefundOrderId(IdUtil.fastSimpleUUID()+"");
-        //不传，默认人民币
-        order.setTransactionCurrencyCode(156);
-        log.info("************退款信息****************"+order);
-        data.setOrder(order);
-        Map<String, Object> encrypt = new PayUtil().encrypt(data, objectMapper, payFactoryProperties);
-        if (encrypt == null) {
-            log.error("加密失败");
-        }
-        return paymentCenterFeign.cancle(encrypt);
-    }
 
     @Override
     public ResponsePayVO query(String orderId, Integer sbiId) {
@@ -244,8 +191,6 @@ public class PaymentCenterMangerImpl implements IPaymentCenterManger {
     }
 
     @Autowired
-    private CancelBackProperties cancelBackProperties;
-    @Autowired
     private PayFactoryProperties payFactoryProperties;
     @Autowired
     private ObjectMapper objectMapper;
@@ -253,7 +198,4 @@ public class PaymentCenterMangerImpl implements IPaymentCenterManger {
     private PaymentCenterFeign paymentCenterFeign;
     @Autowired
     private SuperVIPFeign superVIPFeign;
-    @Resource
-    private RedisUtil redisUtil;
-
 }

@@ -11,7 +11,7 @@ import java.util.List;
  *     用户积分处理
  * </p>
  *
- * @author liujun
+ * @author hz
  * @version 0.17.0
  * @date 2021/01/13 21:26
  **/
@@ -24,7 +24,7 @@ public interface IMemberService {
      *
      * @param saleOrder 销售订单
      * @param productSaleItems 售卖商品子订单
-     * @author liujun
+     * @author hz
      * @date 2021/01/13 21:26
      */
     void sendCashOrderSuccessMessage(SmMerchantProductSaleOrder saleOrder, List<SmMerchantProductSaleItem> productSaleItems);
@@ -46,7 +46,7 @@ public interface IMemberService {
      * </p
      *
      * @param singleNo 销售订单单号
-     * @author liujun
+     * @author hz
      * @date 2021/01/13 21:26
      */
 //    void sendCancelMessage(String singleNo, String refundMethod);

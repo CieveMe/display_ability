@@ -2,7 +2,6 @@ package cn.com.yyxx.yld.supply.manager.impl;
 
 import cn.com.yyxx.yld.supply.dao.bm.IBmStaticDataDefDao;
 import cn.com.yyxx.yld.supply.entity.bm.BmStaticDataDef;
-import cn.com.yyxx.yld.supply.manager.IBmStaticDataDefManager;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

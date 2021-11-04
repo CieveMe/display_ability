@@ -8,7 +8,7 @@ import lombok.Getter;
  * 基础模块缓存枚举类
  * </p>
  *
- * @author linmeng
+ * @author hz
  * @since 2018/12/24 17:51
  */
 @Getter

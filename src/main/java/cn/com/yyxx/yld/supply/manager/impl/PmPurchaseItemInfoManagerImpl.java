@@ -2,10 +2,8 @@ package cn.com.yyxx.yld.supply.manager.impl;
 
 import cn.com.yyxx.yld.supply.dao.pm.IPmPurchaseItemInfoDao;
 import cn.com.yyxx.yld.supply.entity.pm.PmPurchaseItemInfo;
-import cn.com.yyxx.yld.supply.manager.PmPurchaseItemInfoManager;
 import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

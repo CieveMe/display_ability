@@ -8,7 +8,7 @@ import org.springframework.messaging.SubscribableChannel;
  *  支付成功异步输出流
  * </p>
  *
- * @author liujun
+ * @author hz
  * @version 0.17.0
  * @date 2021/01/12 15:41
  */

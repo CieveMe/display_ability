@@ -30,7 +30,7 @@ public interface ISmMerchantProductSaleOrderManager extends IService<SmMerchantP
      * @param codes   编码list
      * @param storeId 门店id
      * @return java.util.List<cn.com.yyxx.yld.scm.entity.sm.SmMerchantProductSaleOrder>
-     * @author linmeng
+     * @author hz
      * @since 2019/2/14 10:46
      */
     List<SmMerchantProductSaleOrder> listByCodeAndStoreId(List<String> codes, Integer storeId);
@@ -43,7 +43,7 @@ public interface ISmMerchantProductSaleOrderManager extends IService<SmMerchantP
      * @param orderNo 订单编号
      * @param sbiId   门店id
      * @return cn.com.yyxx.yld.scm.data.pay.ProductSaleOrderPayDTO
-     * @author linmeng
+     * @author hz
      * @date 2019/9/20 17:48
      */
     ProductSaleOrderPayDTO getByOrderNoAndSbiId(String orderNo, Integer sbiId);
@@ -57,7 +57,7 @@ public interface ISmMerchantProductSaleOrderManager extends IService<SmMerchantP
      * @param sbiId    门店id
      * @param isDelete 是否删除
      * @return cn.com.yyxx.yld.scm.entity.sm.SmMerchantProductSaleOrder
-     * @author linmeng
+     * @author hz
      * @date 2019/9/19 15:35
      */
     SmMerchantProductSaleOrder getByOrderNoAndSbiId(String orderNo, Integer sbiId, Boolean isDelete);

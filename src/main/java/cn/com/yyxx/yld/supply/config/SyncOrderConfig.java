@@ -1,8 +1,5 @@
 package cn.com.yyxx.yld.supply.config;
 
-import cn.com.yyxx.yld.supply.messaging.AddPointSource;
-import cn.com.yyxx.yld.supply.messaging.pay.OrderCancelNewSource;
-import cn.com.yyxx.yld.supply.messaging.pay.OrderCancelSource;
 import cn.com.yyxx.yld.supply.messaging.pay.OrderUpdateSource;
 import cn.com.yyxx.yld.supply.messaging.pay.OrderSaveSource;
 import org.springframework.cloud.stream.annotation.EnableBinding;

@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
  * 采购订单明细项
  * </p>
  *
- * @author linmeng
+ * @author hz
  * @since 2019-03-16
  */
 @Data

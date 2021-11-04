@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  * <p>
  * 门店基础信息 </p
  *
- * @author linmeng
+ * @author hz
  * @since 2018/12/25 10:04
  */
 @Data

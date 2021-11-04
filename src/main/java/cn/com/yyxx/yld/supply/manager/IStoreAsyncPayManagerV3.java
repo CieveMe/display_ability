@@ -17,7 +17,7 @@ public interface IStoreAsyncPayManagerV3 {
      * @param sbiId  门店ID
      * @param termIp 终端Ip
      * @return cn.com.yyxx.yld.scm.data.pay.ResponsePayVO
-     * @author liujun
+     * @author hz
      * @date 2021/1/19 16:35
      * @since 0.17.0
      */
@@ -31,7 +31,7 @@ public interface IStoreAsyncPayManagerV3 {
      * @param orderNo 订单编号
      * @param sbiId   门店ID
      * @return cn.com.yyxx.yld.scm.data.pay.ResponsePayVO
-     * @author linmeng
+     * @author hz
      * @date 2020/4/30 9:34
      * @since 0.14.0
      */
@@ -46,7 +46,7 @@ public interface IStoreAsyncPayManagerV3 {
      * @param orderId 订单ID
      * @param sbiId   门店ID
      * @return cn.com.yyxx.yld.scm.data.pay.ResponsePayVO
-     * @author linmeng
+     * @author hz
      * @date 2020/4/29 16:35
      * @since 0.14.0
      */

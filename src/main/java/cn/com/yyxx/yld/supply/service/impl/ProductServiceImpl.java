@@ -15,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public void saleChangeProduct(RidesOrderVO ridesOrder,
-        List<SmMerchantProductSaleItem> productSaleItems) {
+                                  List<SmMerchantProductSaleItem> productSaleItems) {
         List<ProductItem> productItems = new ArrayList<>();
         List<Long> mpbiIds = new ArrayList<>();
         productSaleItems.forEach((item) -> {
@@ -87,7 +86,7 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public void saleRefundProduct(RidesOrderCancelVO ridesOrder,
-        List<SmMerchantProductSaleItem> productSaleItems) {
+                                  List<SmMerchantProductSaleItem> productSaleItems) {
 
 
         List<ProductItem> productItems = new ArrayList<>();
@@ -140,7 +139,7 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public void saleNewRefundProduct(RidesOrderCancelVO ridesOrder,
-                                  List<SmMerchantProductSaleItem> productSaleItems) {
+                                     List<SmMerchantProductSaleItem> productSaleItems) {
 
 
         List<ProductItem> productItems = new ArrayList<>();

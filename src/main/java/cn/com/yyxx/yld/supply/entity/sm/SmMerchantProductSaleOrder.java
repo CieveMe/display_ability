@@ -20,7 +20,7 @@ import java.util.List;
  * 商家商品销售订单表
  * </p>
  *
- * @author linmeng
+ * @author hz
  * @since 2019-03-05
  */
 @Data

@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
  * 支付交易结果记录表
  * </p>
  *
- * @author linmeng
+ * @author hz
  * @since 2019-09-25
  */
 @Data

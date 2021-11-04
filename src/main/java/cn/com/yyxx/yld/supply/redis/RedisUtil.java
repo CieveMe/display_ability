@@ -101,7 +101,7 @@ public class RedisUtil {
                 " local result = {}; \n" +
                 " result[1] = 1; \n" +
                 "    if  redis.call('GET',key..'___lock') then \n " +
-                "        redis.call('DEL',key..'___lock');\n" +///看看是不是枷锁了
+                "        redis.call('DEL',key..'___lock');\n" + ///看看是不是枷锁了
                 "        result[1] = 1;" +
                 "        return result; \n" +
                 "    else \n" +

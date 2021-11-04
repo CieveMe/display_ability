@@ -11,7 +11,7 @@ import java.net.UnknownHostException;
 /**
  * <p></p>
  *
- * @author liujun
+ * @author hz
  * @version 1.0.0
  * @program yld-supply-chain-v2
  * @description 终端Ip操作

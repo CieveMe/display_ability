@@ -24,7 +24,7 @@ public interface ISmMerchantProductSaleItemDao extends BaseMapper<SmMerchantProd
      *
      * @param nos 品项编号list
      * @return cn.com.yyxx.yld.scm.entity.sm.SmMerchantProductSaleItem
-     * @author linmeng
+     * @author hz
      * @since 2019/2/14 15:44
      */
     List<SmMerchantProductSaleItem> listByNos(@Param("nos") List<String> nos);

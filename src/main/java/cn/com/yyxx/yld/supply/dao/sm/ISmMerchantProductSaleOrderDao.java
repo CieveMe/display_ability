@@ -44,7 +44,7 @@ public interface ISmMerchantProductSaleOrderDao extends BaseMapper<SmMerchantPro
      * @param codes   编码list
      * @param storeId 门店id
      * @return java.util.List<cn.com.yyxx.yld.scm.entity.sm.SmMerchantProductSaleOrder>
-     * @author linmeng
+     * @author hz
      * @since 2019/2/14 10:46
      */
     List<SmMerchantProductSaleOrder> listByCodeAndStoreId(@Param("codes") List<String> codes, @Param("storeId") Integer storeId);
@@ -57,7 +57,7 @@ public interface ISmMerchantProductSaleOrderDao extends BaseMapper<SmMerchantPro
      * @param orderNo 订单编号
      * @param sbiId   门店id
      * @return cn.com.yyxx.yld.scm.data.pay.ProductSaleOrderPayDTO
-     * @author linmeng
+     * @author hz
      * @date 2019/9/20 17:48
      */
     ProductSaleOrderPayDTO getByOrderNoAndSbiId(@Param("orderNo") String orderNo, @Param("sbiId") Integer sbiId);

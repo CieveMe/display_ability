@@ -54,9 +54,6 @@ public class NewAppBaseAction extends AppBaseAction {
             log.warn(key);
             String str =
                 "?store_id=" + store_id + "&serial_num=" + serial_num + "&user_no=" + user_no + "";
-            //http://192.168.50.140:16200/common/query/store_info/get?store_id=24&serial_num=193KBC801755&user_no=976d150a8fa44db3ae7f42268be04a62
-            //http://dev.yingliduo.cn:10020/org/common/query/store_info/get?store_id=26&serial_num=193KBC801755&user_no=976d150a8fa44db3ae7f42268be04a62
-            //http://nginx.yingliduo.cn:46200/org/common/query/store_info/get?store_id=26&serial_num=193KBC801755&user_no=976d150a8fa44db3ae7f42268be04a62
             log.info("请求地址:{}, 参数:{}", authUrlCofig.getAuthurl(), str);
             HttpRequest req = HttpUtil.createRequest(Method.GET, authUrlCofig.getAuthurl() + "" + str);
             req.timeout(10 * 1000);
@@ -137,7 +134,6 @@ public class NewAppBaseAction extends AppBaseAction {
 //            @ApiModelProperty("是否店主")
                 String ubiIsOwner = data.getStr("ubiIsOwner");
                 user.setOwner(Boolean.parseBoolean(ubiIsOwner));
-
                 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 ////拼接user
 

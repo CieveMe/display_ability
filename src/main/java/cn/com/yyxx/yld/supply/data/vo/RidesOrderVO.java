@@ -9,7 +9,7 @@ import lombok.Data;
  *     订单支付结果与操作信息
  * </p>
  *
- * @author liujun
+ * @author hz
  * @version 1.0.0
  * @program yld-supply-chain-v2
  * @date 2021-01-13 09:29
