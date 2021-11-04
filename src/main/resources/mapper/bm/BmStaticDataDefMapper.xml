@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.yyxx.yld.supply.dao.bm.IBmStaticDataDefDao">
+
+    <select id="listByDddId" resultMap="BaseResultMap">
+        SELECT
+        s.*
+        FROM
+        bm_static_data_def s,
+        bm_data_dictionary_def d
+        WHERE
+        s.sdd_ddd_id = d.ddd_id
+        AND s.sdd_is_delete = #{isDelete}
+        AND s.sdd_id = #{sddId}
+        ORDER BY
+        s.sdd_sort
+    </select>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.com.yyxx.yld.supply.entity.bm.BmStaticDataDef">
+        <id column="sdd_id" property="sddId"/>
+        <result column="sdd_ddd_id" property="sddDddId"/>
+        <result column="sdd_code" property="sddCode"/>
+        <result column="sdd_name" property="sddName"/>
+        <result column="sdd_value" property="sddValue"/>
+        <result column="sdd_rel_ddd" property="sddRelDdd"/>
+        <result column="sdd_rel_sdd" property="sddRelSdd"/>
+        <result column="sdd_ext_1" property="sddExt1"/>
+        <result column="sdd_ext_2" property="sddExt2"/>
+        <result column="sdd_ext_3" property="sddExt3"/>
+        <result column="sdd_is_delete" property="sddIsDelete"/>
+        <result column="sdd_desc" property="sddDesc"/>
+        <result column="sdd_sort" property="sddSort"/>
+        <result column="sdd_remark" property="sddRemark"/>
+    </resultMap>
+</mapper>

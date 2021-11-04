@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.yyxx.yld.supply.dao.sm.ISmOrderTransCodeResultDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.com.yyxx.yld.supply.entity.sm.SmOrderTransCodeResult">
+        <id column="otcr_id" property="otcrId" />
+        <result column="otcr_mpso_id" property="otcrMpsoId" />
+        <result column="otcr_no" property="otcrNo" />
+        <result column="otcr_message_type" property="otcrMessageType" />
+        <result column="otcr_content" property="otcrContent" />
+        <result column="otcr_interface_type" property="otcrInterfaceType" />
+        <result column="otcr_trans_no" property="otcrTransNo" />
+        <result column="otcr_batch_no" property="otcrBatchNo" />
+        <result column="otcr_is_success" property="otcrIsSuccess" />
+        <result column="otcr_fail_message" property="otcrFailMessage" />
+        <result column="otcr_create_time" property="otcrCreateTime" />
+        <result column="otcr_modify_time" property="otcrModifyTime" />
+        <result column="otcr_is_delete" property="otcrIsDelete" />
+        <result column="otcr_sort" property="otcrSort" />
+        <result column="otcr_description" property="otcrDescription" />
+        <result column="otcr_remark" property="otcrRemark" />
+    </resultMap>
+
+    <select id="listByNos" resultType="cn.com.yyxx.yld.supply.entity.sm.SmOrderTransCodeResult">
+        SELECT
+        *
+        FROM
+        sm_order_trans_code_result
+        WHERE
+        <foreach collection="nos" separator="OR" item="item" >
+            otcr_no = #{item}
+        </foreach>
+    </select>
+
+</mapper>

@@ -1,0 +1,225 @@
+spring:
+  authurl: http://organization:16200/common/query/store_info/get
+
+  datasource:
+    dynamic:
+      primary: supply-master
+      datasource:
+        supply-master:
+          driver-class-name: com.mysql.jdbc.Driver
+          url: jdbc:mysql://mysql.yld.prod.yingliduo.cn:3306/yld_supply_chain?useUnicode=true&characterEncoding=utf8&useSSL=false
+          username: scm
+          password: "S9XhWRO#R7yq*^wx"
+        #        配置从库,负责查询
+        supply-slave:
+          driver-class-name: com.mysql.jdbc.Driver
+          url: jdbc:mysql://mysql.yld.prod.yingliduo.cn:3306/yld_supply_chain?useUnicode=true&characterEncoding=utf8&useSSL=false
+          username: scm
+          password: "S9XhWRO#R7yq*^wx"
+  #  datasource:
+  #    dynamic:
+  #      primary: supply-read
+  #      datasource:
+  #        supply-read:
+  #          driver-class-name: com.mysql.jdbc.Driver
+  #          url: jdbc:mysql://192.168.50.3:22014/yld_supply_chain?useUnicode=true&characterEncoding=utf8&useSSL=false
+  #          username: public
+  #          password: "R8Z4W7Nf"
+  #        supply-update:
+  #          driver-class-name: com.mysql.jdbc.Driver
+  #          url: jdbc:mysql://192.168.50.3:22014/yld_supply_chain?useUnicode=true&characterEncoding=utf8&useSSL=false
+  #          username: public
+  #          password: "R8Z4W7Nf"
+  #        org:
+  #          driver-class-name: com.mysql.jdbc.Driver
+  #          url: jdbc:mysql://192.168.50.3:22014/yld_organization_info?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+  #          username: public
+  #          password: "R8Z4W7Nf"
+  #        product:
+  #          driver-class-name: com.mysql.jdbc.Driver
+  #          url: jdbc:mysql://192.168.50.3:22014/yld_product_info?useUnicode=true&characterEncoding=utf8&useSSL=false
+  #          username: public
+  #          password: "R8Z4W7Nf"
+  #        userInfo:
+  #          driver-class-name: com.mysql.jdbc.Driver
+  #          url: jdbc:mysql://192.168.50.3:22014/yld_user_info?useUnicode=true&characterEncoding=utf8&useSSL=false
+  #          username: public
+  #          password: "R8Z4W7Nf"
+  redis:
+    database: 1
+    host: redis.yld.prod.yingliduo.cn
+    port: 6379
+    password: 'yld:yWmOurXQgZHZBpDEmC*m4&r^xorSa5ba'
+    #    password: yld:sBWCM8^GCmmfq9@v # 密码（默认为空）
+    timeout:
+      seconds: 6 # 连接超时时长（秒）
+  #  rabbitmq:
+  #    username: yld
+  #    password: yyxx@2019
+  #    addresses: queue-ram1:5672,queue-ram2:5672,queue-disc1:5672
+  rabbitmq:
+    username: "MjphbXFwLWNuLW03cjIyOTFuNjAwbDpMVEFJNEczTEx6NlJWakhhS3hVNnM3YzM="
+    password: "QjA1OTA0QTE2QUNCMjREMjYwRTZENDVGMTVENDRDQkY3NDdBNjM4ODoxNjE0MjMwMjI2MTE2"
+    addresses: rabbitmq.yld.prod.yingliduo.cn
+    virtual-host: admin
+  cloud:
+    nacos:
+      discovery:
+        enabled: true
+        register-enabled: true
+        server-addr: nacos.yingliduo.cn:80
+    stream:
+      binders:
+        yld-rabbit:
+          type: rabbit
+      bindings:
+        yldOrderSaveInPut:
+          destination: yld_order_save_prod
+          binder: yld-rabbit
+          group: yld-group
+        yldOrderSaveOutPut:
+          destination: yld_order_save_prod
+          binder: yld-rabbit
+          group: yld-group
+        yldOrderUpdateInPut:
+          destination: yld_order_update_prod
+          binder: yld-rabbit
+          group: yld-group
+        yldOrderUpdateOutPut:
+          destination: yld_order_update_prod
+          binder: yld-rabbit
+          group: yld-group
+        yldAddPointOutPut:
+          destination: yld_add_point_prod
+          binder: yld-rabbit
+          group: yld-group
+        yldOrderCancelInPut:
+          destination: yld_order_cancel_prod
+          binder: yld-rabbit
+          group: yld-group
+        yldOrderCancelOutPut:
+          destination: yld_order_cancel_prod
+          binder: yld-rabbit
+        yldOrderCancelNewInPut:
+          destination: yld_order_cancel_new_prod
+          binder: yld-rabbit
+          group: yld_group
+        yldOrderCancelNewOutPut:
+          destination: yld_order_cancel_new_prod
+          binder: yld-rabbit
+    #    inetutils:
+    #      preferred-networks: 10.0.0
+    inetutils:
+      preferred-networks:
+
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: ${ADDITIONAL_EUREKA_SERVER_LIST}
+#    #      defaultZone: http://eureka1:8080/eureka/,http://eureka2:8080/eureka/,http://eureka3:8080/eureka/
+#    healthcheck:
+#      enabled: true
+#  instance:
+#    prefer-ip-address: true
+#    instance-id: (${spring.cloud.client.ip-address}):::${spring.application.name}:${server.port}----@project.version@
+
+# 2021-3-17 更新
+# kexinzhu
+#eureka:
+#
+#  instance:
+#    hostname: ${ADDITIONAL_EUREKA_HOST_NAME}
+#    prefer-ip-address: true
+#    instance-id: (${spring.cloud.client.ip-address}):::${spring.application.name}:${server.port}----@project.version@
+#  client:
+#    registry-fetch-interval-seconds: 10
+#    eureka-service-url-poll-interval-seconds: 5
+#    serviceUrl:
+#      defaultZone: ${ADDITIONAL_EUREKA_SERVER_LIST}
+#      defaultZone: http://eureka1:8080/eureka/,http://eureka2:8080/eureka/,http://eureka3:8080/eureka/
+
+server:
+  port: 16501
+
+logging:
+  config: classpath:log4j2/log4j2-prod.xml
+  file: /logs-supply/supply-chain-v2.log
+  level:
+    org.springframework: info
+    cn.com.yyxx.yld: info
+    cn.com.yyxx.yld.scm.service.tm.impl.NaturalDayStatisticsTypeServiceImpl: info
+    cn.com.yyxx.yld.scm.service.tm.impl.OriginalDataSourceServiceImpl: info
+    cn.com.yyxx.yld.scm.service.tm.impl.AccountDayStatisticsTypeServiceImpl: info
+    cn.com.yyxx.yld.scm.service.tm.impl.DayLyDataSourceServiceImpl: info
+security:
+  oauth:
+    server:
+      host: ${ADDITIONAL_AUTH_HOST_NAME}
+  oauth2:
+    client:
+      access-token-uri: ${security.oauth.server.host}/oauth/token
+      user-authorization-uri: ${security.oauth.server.host}/oauth/authorize
+      client-authentication-scheme: form
+
+yld:
+  payment:
+    center:
+      name: retail-payment-center-dispatch
+      url:
+      refund: http://supplyv2:16501/common/supply/v2/cancel/back
+  supervip:
+    center:
+      name: retail-app-member-handler
+      url:
+    discount:
+      name: retail-app-finance-handler
+      url:
+  productv2:
+    info:
+      name: yld-product-v2
+      url:
+  product:
+    info:
+      name: yld-product-info-service
+      url:
+  user:
+    info:
+      name: yld-user-info-service
+      url:
+  organization:
+    name: yld-organization-info-service
+    url:
+
+  yq:
+#    url: http://api.yingliduo.cn/member/order_detail.html?orderNo=
+    url: http://yq.yingliduo.cn/index.html?orderNo=
+
+  smw:
+    cancel_bill_url: http://member-handler:8700/member/api/cancel_bill/ORDERNO
+    url: http://api.yingliduo.cn/member/order_detail.html?orderNo=
+
+  scm:
+    pay:
+      factory:
+        pay-url: http://retail-payment-center-dispatch:8800/asyncgateface
+        encrypt: true
+        query-url: http://retail-payment-center-dispatch:8800/gateface
+        return-notify-url: http://supplyv2:16501/common/supply/v2/pay/back
+        return-notify-openId: http://supplyv2:16501/common/supply/v2/open_id/back
+    wx:
+      template:
+        config:
+          payResult: AU8yWxGk7Z5RjQ8FBVRqZ1gb3UTuxptll8CM2oTTuY0
+          refundResult: Jai2-5dWbwiC_CKMSiEWJgZiia26jTr3k89KwwokK0A
+socket:
+  http: netty-server:8090
+  socketip:
+  port: 22221
+  url: /receive_msg
+
+tobacoo:
+  http: 192.168.50.162:8080
+  socketip:
+  port: 22221
+  url: /managex/send_socket.rhtml
+  enable: false

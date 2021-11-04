@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.yyxx.yld.supply.dao.sm.ISmMerchantProductSaleItemDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.com.yyxx.yld.supply.entity.sm.SmMerchantProductSaleOrder">
+        <id column="mpso_id" property="mpsoId" />
+        <result column="mpso_sbi_code" property="mpsoSbiCode" />
+        <result column="mpso_store_name" property="mpsoStoreName" />
+        <result column="mpso_cashier" property="mpsoCashier" />
+        <result column="mpso_cashier_no" property="mpsoCashierNo" />
+        <result column="mpso_order_no" property="mpsoOrderNo" />
+        <result column="mpso_single_no" property="mpsoSingleNo" />
+        <result column="mpso_serial_no" property="mpsoSerialNo" />
+        <result column="mpso_order_status" property="mpsoOrderStatus" />
+        <result column="mpso_order_time" property="mpsoOrderTime" />
+        <result column="mpso_payment_method" property="mpsoPaymentMethod" />
+        <result column="mpso_pay_order_id" property="mpsoPayOrderId" />
+        <result column="mpso_pay_bill_no" property="mpsoPayBillNo" />
+        <result column="mpso_pay_qr_code_id" property="mpsoPayQrCodeId" />
+        <result column="mpso_scan_code_channel" property="mpsoScanCodeChannel" />
+        <result column="mpso_smi_id" property="mpsoSmiId" />
+        <result column="mpso_smi_phone" property="mpsoSmiPhone" />
+        <result column="mpso_owner_integration" property="mpsoOwnerIntegration" />
+        <result column="mpso_this_integration" property="mpsoThisIntegration" />
+        <result column="mpso_third_buyer_id" property="mpsoThirdBuyerId" />
+        <result column="mpso_third_buyer_name" property="mpsoThirdBuyerName" />
+        <result column="mpso_row_num" property="mpsoRowNum" />
+        <result column="mpso_total_num" property="mpsoTotalNum" />
+        <result column="mpso_total_price" property="mpsoTotalPrice" />
+        <result column="mpso_real_price" property="mpsoRealPrice" />
+        <result column="mpso_should_price" property="mpsoShouldPrice" />
+        <result column="mpso_actual_price" property="mpsoActualPrice" />
+        <result column="mpso_actual_pay_price" property="mpsoActualPayPrice" />
+        <result column="mpso_cash_price" property="mpsoCashPrice" />
+        <result column="mpso_change_price" property="mpsoChangePrice" />
+        <result column="mpso_gross_profit" property="mpsoGrossProfit" />
+        <result column="mpso_discount" property="mpsoDiscount" />
+        <result column="mpso_real_discount" property="mpsoRealDiscount" />
+        <result column="mpso_is_free" property="mpsoIsFree" />
+        <result column="mpso_is_wipe_jiao" property="mpsoIsWipeJiao" />
+        <result column="mpso_is_print_receipt" property="mpsoIsPrintReceipt" />
+        <result column="mpso_print_frequency" property="mpsoPrintFrequency" />
+        <result column="mpso_is_payment" property="mpsoIsPayment" />
+        <result column="mpso_pay_time" property="mpsoPayTime" />
+        <result column="mpso_is_refund" property="mpsoIsRefund" />
+        <result column="mpso_refund_time" property="mpsoRefundTime" />
+        <result column="mpso_create_time" property="mpsoCreateTime" />
+        <result column="mpso_modify_time" property="mpsoModifyTime" />
+        <result column="mpso_is_delete" property="mpsoIsDelete" />
+        <result column="mpso_sort" property="mpsoSort" />
+        <result column="mpso_description" property="mpsoDescription" />
+        <result column="mpso_remark" property="mpsoRemark" />
+        <result column="mpso_amount_ratio" property="mpsoAmountRatio" />
+        <result column="mpso_civic_integration" property="mpsoCivicIntegration" />
+        <collection  javaType="list" ofType="cn.com.yyxx.yld.supply.entity.sm.SmMerchantProductSaleItem" property="items">
+        <id column="mpsi_id" property="mpsiId" />
+        <result column="mpsi_no" property="mpsiNo" />
+        <result column="mpsi_mpbi_id" property="mpsiMpbiId" />
+        <result column="mpsi_pisl_id" property="mpsiPislId" />
+        <result column="mpsi_mpso_id" property="mpsiMpsoId" />
+        <result column="mpsi_pci_id" property="mpsiPciId" />
+        <result column="mpsi_first_pci_id" property="mpsiFirstPciId" />
+        <result column="mpsi_first_pci_name" property="mpsiFirstPciName" />
+        <result column="mpsi_second_pci_id" property="mpsiSecondPciId" />
+        <result column="mpsi_second_pci_name" property="mpsiSecondPciName" />
+        <result column="mpsi_code" property="mpsiCode" />
+        <result column="mpsi_bar_codes" property="mpsiBarCodes" />
+        <result column="mpsi_name" property="mpsiName" />
+        <result column="mpsi_unit" property="mpsiUnit" />
+        <result column="mpsi_size" property="mpsiSize" />
+        <result column="mpsi_retail_price" property="mpsiRetailPrice" />
+        <result column="mpsi_discount" property="mpsiDiscount" />
+        <result column="mpsi_discount_total" property="mpsiDiscountTotal" />
+        <result column="mpsi_num" property="mpsiNum" />
+        <result column="mpsi_num_allow_decimal" property="mpsiNumAllowDecimal" />
+        <result column="mpsi_now_price" property="mpsiNowPrice" />
+        <result column="mpsi_wholesale_price" property="mpsiWholesalePrice" />
+        <result column="mpsi_sub_total" property="mpsiSubTotal" />
+        <result column="mpsi_is_refund" property="mpsiIsRefund" />
+        <result column="mpsi_create_time" property="mpsiCreateTime" />
+        <result column="mpsi_modify_time" property="mpsiModifyTime" />
+        <result column="mpsi_is_delete" property="mpsiIsDelete" />
+        <result column="mpsi_sort" property="mpsiSort" />
+        <result column="mpsi_description" property="mpsiDescription" />
+        <result column="mpsi_remark" property="mpsiRemark" />
+        </collection>
+    </resultMap>
+
+    <select id="listByNos" resultType="cn.com.yyxx.yld.supply.entity.sm.SmMerchantProductSaleItem">
+        SELECT
+        *
+        FROM
+        sm_merchant_product_sale_item
+        WHERE
+        <foreach collection="nos" separator="OR" item="item">
+            mpsi_no = #{item}
+        </foreach>
+    </select>
+
+    <select id="getMaxSort" resultType="integer">
+        SELECT
+            IFNULL(MAX(mpsi_sort),0)
+        FROM
+            sm_merchant_product_sale_item
+    </select>
+
+    <select id="getByOrderCancelStatus" resultMap="BaseResultMap">
+        SELECT *
+        FROM sm_merchant_product_sale_order odr
+        INNER JOIN sm_merchant_product_sale_item item on odr.mpso_id = item.mpsi_mpso_id
+        WHERE odr.mpso_is_refund = 1
+        AND item.mpsi_is_refund = 0
+        AND odr.mpso_create_time &gt;= #{startT}
+        AND odr.mpso_create_time &lt; #{endT}
+    </select>
+
+    <select id="getByOrderCancelType" resultType="cn.com.yyxx.yld.supply.entity.sm.SmMerchantProductSaleItem">
+        SELECT *
+        FROM sm_merchant_product_sale_order odr
+        INNER JOIN sm_merchant_product_sale_item item on odr.mpso_id = item.mpsi_mpso_id
+        WHERE
+        item.mpsi_is_refund = 1
+        AND item.mpsi_is_refund_type = 0
+        AND odr.mpso_create_time &gt;= #{startT}
+        AND odr.mpso_create_time &lt; #{endT}
+    </select>
+
+</mapper>

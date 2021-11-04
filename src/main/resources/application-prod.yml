@@ -1,0 +1,184 @@
+spring:
+  authurl: http://organization:16200/common/query/store_info/get
+
+  datasource:
+    dynamic:
+      primary: supply-master
+      datasource:
+        supply-master:
+          driver-class-name: com.mysql.jdbc.Driver
+          url: jdbc:mysql://yld-supply.mysql.huhehaote.rds.aliyuncs.com:3306/yld_supply_chain?useUnicode=true&characterEncoding=utf8&useSSL=false
+          username: scm
+          password: "S9XhWRO#R7yq*^wx"
+        #        配置从库,负责查询
+        supply-slave:
+          driver-class-name: com.mysql.jdbc.Driver
+          url: jdbc:mysql://yld-supply.mysql.huhehaote.rds.aliyuncs.com:3306/yld_supply_chain?useUnicode=true&characterEncoding=utf8&useSSL=false
+          username: scm
+          password: "S9XhWRO#R7yq*^wx"
+#  datasource:
+#    dynamic:
+#      primary: supply-read
+#      datasource:
+#        supply-read:
+#          driver-class-name: com.mysql.jdbc.Driver
+#          url: jdbc:mysql://192.168.50.3:22014/yld_supply_chain?useUnicode=true&characterEncoding=utf8&useSSL=false
+#          username: public
+#          password: "R8Z4W7Nf"
+#        supply-update:
+#          driver-class-name: com.mysql.jdbc.Driver
+#          url: jdbc:mysql://192.168.50.3:22014/yld_supply_chain?useUnicode=true&characterEncoding=utf8&useSSL=false
+#          username: public
+#          password: "R8Z4W7Nf"
+#        org:
+#          driver-class-name: com.mysql.jdbc.Driver
+#          url: jdbc:mysql://192.168.50.3:22014/yld_organization_info?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+#          username: public
+#          password: "R8Z4W7Nf"
+#        product:
+#          driver-class-name: com.mysql.jdbc.Driver
+#          url: jdbc:mysql://192.168.50.3:22014/yld_product_info?useUnicode=true&characterEncoding=utf8&useSSL=false
+#          username: public
+#          password: "R8Z4W7Nf"
+#        userInfo:
+#          driver-class-name: com.mysql.jdbc.Driver
+#          url: jdbc:mysql://192.168.50.3:22014/yld_user_info?useUnicode=true&characterEncoding=utf8&useSSL=false
+#          username: public
+#          password: "R8Z4W7Nf"
+  redis:
+    database: 1
+    host: yyxx-yld.redis.huhehaote.rds.aliyuncs.com
+    port: 6379
+    password: yld:sBWCM8^GCmmfq9@v # 密码（默认为空）
+    timeout:
+      seconds: 6 # 连接超时时长（秒）
+  rabbitmq:
+    username: yld
+    password: yyxx@2019
+    addresses: queue-ram1:5672,queue-ram2:5672,queue-disc1:5672
+
+  cloud:
+    inetutils:
+      preferred-networks: 10.0.0
+    stream:
+      binders:
+        yld-rabbit:
+          type: rabbit
+      bindings:
+        yldOrderSaveInPut:
+          destination: yld_order_save_prod
+          binder: yld-rabbit
+          group: yld-group
+        yldOrderSaveOutPut:
+          destination: yld_order_save_prod
+          binder: yld-rabbit
+          group: yld-group
+        yldOrderUpdateInPut:
+          destination: yld_order_update_prod
+          binder: yld-rabbit
+          group: yld-group
+        yldOrderUpdateOutPut:
+          destination: yld_order_update_prod
+          binder: yld-rabbit
+          group: yld-group
+        yldAddPointOutPut:
+          destination: yld_add_point_prod
+          binder: yld-rabbit
+          group: yld-group
+        yldOrderCancelInPut:
+          destination: yld_order_cancel_prod
+          binder: yld-rabbit
+          group: yld-group
+        yldOrderCancelOutPut:
+          destination: yld_order_cancel_prod
+          binder: yld-rabbit
+        yldOrderCancelNewInPut:
+          destination: yld_order_cancel_new_prod
+          binder: yld-rabbit
+          group: yld_group
+        yldOrderCancelNewOutPut:
+          destination: yld_order_cancel_new_prod
+          binder: yld-rabbit
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${ADDITIONAL_EUREKA_SERVER_LIST}
+    #      defaultZone: http://eureka1:8080/eureka/,http://eureka2:8080/eureka/,http://eureka3:8080/eureka/
+    healthcheck:
+      enabled: true
+  instance:
+    prefer-ip-address: true
+    instance-id: (${spring.cloud.client.ip-address}):::${spring.application.name}:${server.port}----@project.version@
+
+server:
+  port: 16501
+
+logging:
+ file: /logs-supply/supply-chain.log
+ level:
+   org.springframework: info
+   cn.com.yyxx.yld: info
+   cn.com.yyxx.yld.scm.service.tm.impl.NaturalDayStatisticsTypeServiceImpl: info
+   cn.com.yyxx.yld.scm.service.tm.impl.OriginalDataSourceServiceImpl: info
+   cn.com.yyxx.yld.scm.service.tm.impl.AccountDayStatisticsTypeServiceImpl: info
+   cn.com.yyxx.yld.scm.service.tm.impl.DayLyDataSourceServiceImpl: info
+security:
+  oauth:
+    server:
+      host: ${ADDITIONAL_AUTH_HOST_NAME}
+  oauth2:
+    client:
+      access-token-uri: ${security.oauth.server.host}/oauth/token
+      user-authorization-uri: ${security.oauth.server.host}/oauth/authorize
+      client-authentication-scheme: form
+
+yld:
+  payment:
+    center:
+      name: retail-payment-center-dispatch
+      url:
+  supervip:
+    center:
+      name: retail-app-member-handler
+      url:
+  productv2:
+    info:
+      name: yld-product-v2
+      url:
+  product:
+    info:
+      name: yld-product-info-service
+      url:
+  user:
+    info:
+      name: yld-user-info-service
+      url:
+  organization:
+    name: yld-organization-info-service
+    url:
+
+  yq:
+    url: http://yq.yingliduo.cn/index.html?orderNo=
+
+  smw:
+    cancel_bill_url: http://192.168.30.221:30089/member/api/cancel_bill/ORDERNO.rhtml
+
+  scm:
+    pay:
+      factory:
+        pay-url: http://payfactory:8080/yld-pay-factory/asyncgateface
+        encrypt: true
+        query-url: http://payfactory:8080/yld-pay-factory/gateface
+        return-notify-url: http://nginx.yingliduo.cn:46200/supply-v2/common/supply/v2/pay/back
+        return-notify-openId: http://nginx.yingliduo.cn:46200/supply-v2/common/supply/v2/open_id/back
+    wx:
+      template:
+        config:
+          payResult: AU8yWxGk7Z5RjQ8FBVRqZ1gb3UTuxptll8CM2oTTuY0
+          refundResult: Jai2-5dWbwiC_CKMSiEWJgZiia26jTr3k89KwwokK0A
+socket:
+  http: netty-server:8090
+  socketip:
+  port: 22221
+  url: /receive_msg

@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.yyxx.yld.supply.dao.sm.ISmMerchantProductSaleOrderDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.com.yyxx.yld.supply.entity.sm.SmMerchantProductSaleOrder">
+        <id column="mpso_id" property="mpsoId" />
+        <result column="mpso_sbi_id" property="mpsoSbiId" />
+        <result column="mpso_sbi_province_id" property="mpsoSbiProvinceId" />
+        <result column="mpso_sbi_city_id" property="mpsoSbiCityId" />
+        <result column="mpso_sbi_area_id" property="mpsoSbiAreaId" />
+        <result column="mpso_sbi_type" property="mpsoSbiType" />
+        <result column="mpso_sbi_code" property="mpsoSbiCode" />
+        <result column="mpso_store_name" property="mpsoStoreName" />
+        <result column="mpso_sdc_id" property="mpsoSdcId" />
+        <result column="mpso_client_name" property="mpsoClientName" />
+        <result column="mpso_ubi_id" property="mpsoUbiId" />
+        <result column="mpso_cashier" property="mpsoCashier" />
+        <result column="mpso_cashier_no" property="mpsoCashierNo" />
+        <result column="mpso_order_no" property="mpsoOrderNo" />
+        <result column="mpso_single_no" property="mpsoSingleNo" />
+        <result column="mpso_serial_no" property="mpsoSerialNo" />
+        <result column="mpso_order_status" property="mpsoOrderStatus" />
+        <result column="mpso_order_time" property="mpsoOrderTime" />
+        <result column="mpso_payment_method" property="mpsoPaymentMethod" />
+        <result column="mpso_pay_order_id" property="mpsoPayOrderId" />
+        <result column="mpso_pay_bill_no" property="mpsoPayBillNo" />
+        <result column="mpso_pay_qr_code_id" property="mpsoPayQrCodeId" />
+        <result column="mpso_scan_code_channel" property="mpsoScanCodeChannel" />
+        <result column="mpso_smi_id" property="mpsoSmiId" />
+        <result column="mpso_smi_phone" property="mpsoSmiPhone" />
+        <result column="mpso_owner_integration" property="mpsoOwnerIntegration" />
+        <result column="mpso_this_integration" property="mpsoThisIntegration" />
+        <result column="mpso_is_calculate_member" property="mpsoIsCalculateMember" />
+        <result column="mpso_is_for_generate" property="mpsoIsForGenerate" />
+        <result column="mpso_third_buyer_id" property="mpsoThirdBuyerId" />
+        <result column="mpso_third_buyer_name" property="mpsoThirdBuyerName" />
+        <result column="mpso_row_num" property="mpsoRowNum" />
+        <result column="mpso_total_num" property="mpsoTotalNum" />
+        <result column="mpso_total_price" property="mpsoTotalPrice" />
+        <result column="mpso_real_price" property="mpsoRealPrice" />
+        <result column="mpso_should_price" property="mpsoShouldPrice" />
+        <result column="mpso_actual_price" property="mpsoActualPrice" />
+        <result column="mpso_actual_pay_price" property="mpsoActualPayPrice" />
+        <result column="mpso_cash_price" property="mpsoCashPrice" />
+        <result column="mpso_change_price" property="mpsoChangePrice" />
+        <result column="mpso_gross_profit" property="mpsoGrossProfit" />
+        <result column="mpso_discount" property="mpsoDiscount" />
+        <result column="mpso_real_discount" property="mpsoRealDiscount" />
+        <result column="mpso_is_free" property="mpsoIsFree" />
+        <result column="mpso_is_wipe_jiao" property="mpsoIsWipeJiao" />
+        <result column="mpso_is_print_receipt" property="mpsoIsPrintReceipt" />
+        <result column="mpso_print_frequency" property="mpsoPrintFrequency" />
+        <result column="mpso_is_payment" property="mpsoIsPayment" />
+        <result column="mpso_pay_time" property="mpsoPayTime" />
+        <result column="mpso_is_refund" property="mpsoIsRefund" />
+        <result column="mpso_refund_time" property="mpsoRefundTime" />
+        <result column="mpso_create_time" property="mpsoCreateTime" />
+        <result column="mpso_modify_time" property="mpsoModifyTime" />
+        <result column="mpso_is_delete" property="mpsoIsDelete" />
+        <result column="mpso_sort" property="mpsoSort" />
+        <result column="mpso_description" property="mpsoDescription" />
+        <result column="mpso_remark" property="mpsoRemark" />
+        <result column="mpso_amount_ratio" property="mpsoAmountRatio" />
+        <result column="mpso_civic_integration" property="mpsoCivicIntegration" />
+        <collection  javaType="list" ofType="cn.com.yyxx.yld.supply.entity.sm.SmMerchantProductSaleItem" property="items">
+            <id column="mpsi_id" property="mpsiId" />
+            <result column="mpsi_no" property="mpsiNo" />
+        </collection>
+    </resultMap>
+
+    <select id="listByCodeAndStoreId" resultType="cn.com.yyxx.yld.supply.entity.sm.SmMerchantProductSaleOrder">
+        SELECT
+        *
+        FROM
+        sm_merchant_product_sale_order
+        WHERE
+        mpso_sbi_id = #{storeId} AND
+        <foreach collection="codes" open="(" close=")" separator="OR" item="code">
+            mpso_order_no = #{code}
+        </foreach>
+    </select>
+
+    <select id="getByOrderNoAndSbiId" resultType="cn.com.yyxx.yld.supply.data.dto.ProductSaleOrderPayDTO">
+        SELECT
+        o.mpso_id,
+        o.mpso_payment_method,
+        o.mpso_order_no,
+        o.mpso_sdc_id,
+        method.sdd_code AS mpso_payment_method_code,
+        o.mpso_order_status,
+        o.mpso_actual_pay_price,
+        sta.sdd_code AS mpso_order_status_code,
+        sta.sdd_name AS mpso_order_status_name,
+        o.mpso_scan_code_channel,
+        scc.sdd_ext_1 AS  mpso_scan_code_channel_ext1,
+        o.mpso_third_buyer_id AS openId
+        FROM
+        sm_merchant_product_sale_order o
+        LEFT JOIN bm_static_data_def scc on o.mpso_scan_code_channel = scc.sdd_id,
+        bm_static_data_def sta,
+        bm_static_data_def method
+        WHERE
+        sta.sdd_id = o.mpso_order_status
+        AND method.sdd_id = o.mpso_payment_method
+        <if test="sbiId != null">
+            AND o.mpso_sbi_id = #{sbiId}
+        </if>
+        AND o.mpso_order_no = #{orderNo}
+    </select>
+
+    <select id="getByOrderNo" resultMap="BaseResultMap">
+        SELECT
+            mpso_id,
+            mpso_sbi_id,
+            mpso_sbi_province_id,
+            mpso_sbi_city_id,
+            mpso_sbi_area_id,
+            mpso_sbi_type,
+            mpso_sbi_code,
+            mpso_store_name,
+            mpso_sdc_id,
+            mpso_client_name,
+            mpso_ubi_id,
+            mpso_cashier,
+            mpso_cashier_no,
+            mpso_order_no,
+            mpso_single_no,
+            mpso_serial_no,
+            mpso_order_status,
+            mpso_order_time,
+            mpso_payment_method,
+            mpso_pay_order_id,
+            mpso_pay_bill_no,
+            mpso_pay_qr_code_id,
+            mpso_scan_code_channel,
+            mpso_smi_id,
+            mpso_smi_phone,
+            mpso_owner_integration,
+            mpso_this_integration,
+            mpso_is_calculate_member,
+            mpso_is_for_generate,
+            mpso_third_buyer_id,
+            mpso_third_buyer_name,
+            mpso_row_num,
+            mpso_total_num,
+            mpso_total_price,
+            mpso_real_price,
+            mpso_should_price,
+            mpso_actual_price,
+            mpso_actual_pay_price,
+            mpso_cash_price,
+            mpso_change_price,
+            mpso_gross_profit,
+            mpso_discount,
+            mpso_real_discount,
+            mpso_is_free,
+            mpso_is_wipe_jiao,
+            mpso_is_print_receipt,
+            mpso_print_frequency,
+            mpso_is_payment,
+            mpso_pay_time,
+            mpso_is_refund,
+            mpso_refund_time,
+            mpso_amount_ratio,
+            mpso_civic_integration,
+            mpso_create_time,
+            mpso_modify_time,
+            mpso_is_delete,
+            mpso_sort,
+            mpso_description,
+            mpso_remark,
+            item.*
+        FROM
+        sm_merchant_product_sale_order odr
+        LEFT JOIN sm_merchant_product_sale_item item on odr.mpso_id = item.mpsi_mpso_id
+        where
+            mpso_order_no = #{orderNo}
+    </select>
+
+
+    <select id="getOrderByNo" resultMap="orderVoMap">
+        SELECT
+            a.*,
+            b.*
+        FROM
+            sm_merchant_product_sale_order AS a
+                LEFT JOIN sm_merchant_product_sale_item AS b ON a.mpso_id = b.mpsi_mpso_id
+        WHERE
+             a.mpso_is_delete = false
+          AND b.mpsi_is_delete =false
+          AND a.mpso_order_no = #{orderNo}
+          AND a.mpso_sbi_id = #{storeId}
+    </select>
+
+    <resultMap id="orderVoMap" type="cn.com.yyxx.yld.supply.data.vo.SmMerchantProductSaleOrderVO">
+        <result column="mpso_sbi_code" property="sbiCode" />
+        <result column="mpso_store_name" property="mpsoStoreName" />
+        <result column="mpso_cashier" property="mpsoCashier" />
+        <result column="mpso_cashier_no" property="mpsoCashierNo" />
+        <result column="mpso_order_no" property="mpsoOrderNo" />
+        <result column="mpso_single_no" property="mpsoSingleNo" />
+        <result column="mpso_serial_no" property="mpsoSerialNo" />
+        <result column="mpso_order_status" property="mpsoOrderStatus" />
+        <result column="mpso_order_time" property="mpsoOrderTime" />
+        <result column="mpso_payment_method" property="mpsoPaymentMethod" />
+        <result column="mpso_pay_order_id" property="mpsoPayOrderId" />
+        <result column="mpso_pay_bill_no" property="mpsoPayBillNo" />
+        <result column="mpso_pay_qr_code_id" property="mpsoPayQrCodeId" />
+        <result column="mpso_scan_code_channel" property="mpsoScanCodeChannel" />
+        <result column="mpso_smi_id" property="mpsoSmiId" />
+        <result column="mpso_smi_phone" property="mpsoSmiPhone" />
+        <result column="mpso_owner_integration" property="mpsoOwnerIntegration" />
+        <result column="mpso_this_integration" property="mpsoThisIntegration" />
+        <result column="mpso_third_buyer_id" property="mpsoThirdBuyerId" />
+        <result column="mpso_third_buyer_name" property="mpsoThirdBuyerName" />
+        <result column="mpso_row_num" property="mpsoRowNum" />
+        <result column="mpso_total_num" property="mpsoTotalNum" />
+        <result column="mpso_total_price" property="mpsoTotalPrice" />
+        <result column="mpso_real_price" property="mpsoRealPrice" />
+        <result column="mpso_should_price" property="mpsoShouldPrice" />
+        <result column="mpso_actual_price" property="mpsoActualPrice" />
+        <result column="mpso_actual_pay_price" property="mpsoActualPayPrice" />
+        <result column="mpso_cash_price" property="mpsoCashPrice" />
+        <result column="mpso_change_price" property="mpsoChangePrice" />
+        <result column="mpso_gross_profit" property="mpsoGrossProfit" />
+        <result column="mpso_discount" property="mpsoDiscount" />
+        <result column="mpso_real_discount" property="mpsoRealDiscount" />
+        <result column="mpso_is_free" property="mpsoIsFree" />
+        <result column="mpso_is_wipe_jiao" property="mpsoIsWipeJiao" />
+        <result column="mpso_is_print_receipt" property="mpsoIsPrintReceipt" />
+        <result column="mpso_print_frequency" property="mpsoPrintFrequency" />
+        <result column="mpso_is_payment" property="mpsoIsPayment" />
+        <result column="mpso_pay_time" property="mpsoPayTime" />
+        <result column="mpso_is_refund" property="mpsoIsRefund" />
+        <result column="mpso_refund_time" property="mpsoRefundTime" />
+        <result column="mpso_create_time" property="mpsoCreateTime" />
+        <result column="mpso_modify_time" property="mpsoModifyTime" />
+        <result column="mpso_is_delete" property="mpsoIsDelete" />
+        <result column="mpso_sort" property="mpsoSort" />
+        <result column="mpso_description" property="mpsoDescription" />
+        <result column="mpso_remark" property="mpsoRemark" />
+        <result column="mpso_amount_ratio" property="mpsoAmountRatio" />
+        <result column="mpso_civic_integration" property="mpsoCivicIntegration" />
+        <collection  javaType="list" ofType="cn.com.yyxx.yld.supply.data.vo.SmMerchantProductSaleItemVO" property="items">
+            <result column="mpsi_no" property="mpsiNo" />
+            <result column="mpsi_mpbi_id" property="mpsiMpbiId" />
+            <result column="mpsi_code" property="mpsiCode" />
+            <result column="mpsi_bar_codes" property="mpsiBarCodes" />
+            <result column="mpsi_name" property="mpsiName" />
+            <result column="mpsi_unit" property="mpsiUnit" />
+            <result column="mpsi_size" property="mpsiSize" />
+            <result column="mpsi_retail_price" property="mpsiRetailPrice" />
+            <result column="mpsi_discount" property="mpsiDiscount" />
+            <result column="mpsi_num" property="mpsiNum" />
+            <result column="mpsi_num_allow_decimal" property="mpsiNumAllowDecimal" />
+            <result column="mpsi_now_price" property="mpsiNowPrice" />
+            <result column="mpsi_wholesale_price" property="mpsiWholesalePrice" />
+            <result column="mpsi_sub_total" property="mpsiSubTotal" />
+            <result column="mpsi_is_refund" property="mpsiIsRefund" />
+            <result column="mpsi_create_time" property="mpsiCreateTime" />
+            <result column="mpsi_modify_time" property="mpsiModifyTime" />
+            <result column="mpsi_is_delete" property="mpsiIsDelete" />
+            <result column="mpsi_sort" property="mpsiSort" />
+            <result column="mpsi_description" property="mpsiDescription" />
+            <result column="mpsi_remark" property="mpsiRemark" />
+        </collection>
+    </resultMap>
+
+    <select id="getMaxSortByStoreId" resultType="integer">
+        SELECT
+            IFNULL(MAX(mpso_sort),0)
+        FROM
+            sm_merchant_product_sale_order
+            WHERE mpso_sbi_id = #{storeId}
+    </select>
+
+    <update id="deleteOrder">
+        UPDATE
+            sm_merchant_product_sale_order
+        SET
+            mpso_is_delete = true
+        WHERE
+            mpso_is_delete = false
+            AND mpso_sbi_id = #{storeId}
+            AND mpso_order_no = #{orderNo}
+    </update>
+
+    <select id="getOrderForOwner" resultMap="orderForOwner">
+        SELECT
+            sta.sdd_name AS orderStatus,
+            sta.sdd_code AS statusCode,
+            a.mpso_single_no AS singleNo,
+            a.mpso_order_time as mpsoOrderTime ,
+            CONCAT(IFNULL(type.sdd_name,"") , " ", IFNULL(channel.sdd_name,"")  ) AS payType,
+            a.mpso_total_price AS totalPrice,
+            a.mpso_actual_price AS actualPrice,
+            ( a.mpso_total_price - a.mpso_actual_price ) AS discountPrice,
+            a.mpso_description as failResult,
+            a.mpso_sbi_id AS sbiId,
+            a.mpso_order_no AS orderNo,
+            b.mpsi_id AS id,
+            b.mpsi_name AS NAME,
+            b.mpsi_num AS number,
+            b.mpsi_now_price as price,
+            b.mpsi_discount_total AS count
+        FROM
+            sm_merchant_product_sale_order a
+            LEFT JOIN sm_merchant_product_sale_item b ON a.mpso_id = b.mpsi_mpso_id
+            LEFT JOIN bm_static_data_def sta ON a.mpso_order_status = sta.sdd_id
+            LEFT JOIN bm_static_data_def type ON a.mpso_payment_method = type.sdd_id
+            LEFT JOIN bm_static_data_def channel ON a.mpso_scan_code_channel = channel.sdd_id
+        WHERE
+            a.mpso_is_delete = 0
+            AND b.mpsi_is_delete = 0
+            AND a.mpso_sbi_id = #{sbiId}
+            AND a.mpso_order_no = #{orderNo}
+    </select>
+    <select id="queryOwnerOrderVo" resultType="cn.com.yyxx.yld.supply.data.vo.OwnerOrderVo">
+        SELECT
+            mpsoSbiId,
+            mpsoSbiType,
+            mpsoSbiCode,
+            mpsoStoreName,
+            mpsoOrderNo,
+            mpsoSingleNo,
+            cashCustomer,
+            onlineCustomer,
+            supervipCustomer,
+            mpsoPaymentNum,
+            a.price,
+            IFNULL( SUM( IF ( mpso_payment_method = '660990e131034179b42222dd3f42e416', b.paymentPrice, 0 ) ), 0 ) AS cashTurnover,
+            IFNULL( SUM( IF ( mpso_payment_method != '660990e131034179b42222dd3f42e416' and mpso_payment_method != '98ca296f24e8d95e2563b1cc5190bb19', b.paymentPrice, 0 ) ), 0 ) AS onlineTurnover,
+            IFNULL(SUM(IF( mpso_payment_method='98ca296f24e8d95e2563b1cc5190bb19',b.paymentPrice,0)),0) AS supervipTurnover
+        FROM
+            (
+            SELECT
+                mpso_sbi_id AS mpsoSbiId,
+                mpso_sbi_type AS mpsoSbiType,
+                mpso_sbi_code AS mpsoSbiCode,
+                mpso_store_name AS mpsoStoreName,
+                mpso_order_no AS mpsoOrderNo,
+                mpso_single_no AS mpsoSingleNo,
+                COUNT( 1 ) AS mpsoPaymentNum,
+                IFNULL( SUM( mpso_actual_price ),0) AS price,
+                IFNULL( SUM( IF ( mpso_payment_method = '660990e131034179b42222dd3f42e416', 1, 0 ) ), 0 ) AS cashCustomer,
+                IFNULL( SUM( IF ( mpso_payment_method != '660990e131034179b42222dd3f42e416' and mpso_payment_method != '98ca296f24e8d95e2563b1cc5190bb19', 1, 0 ) ), 0 ) AS onlineCustomer,
+                IFNULL( SUM( IF ( mpso_payment_method = '98ca296f24e8d95e2563b1cc5190bb19', 1, 0 ) ), 0 ) AS supervipCustomer
+            FROM
+                sm_merchant_product_sale_order
+            WHERE
+                mpso_is_delete = 0
+                AND mpso_is_refund = 0
+                AND mpso_is_payment = 1
+                AND mpso_sbi_id = #{mpsoSbiId}
+                AND mpso_pay_time >= #{startT}
+                AND #{endT} >= mpso_pay_time
+            ) a,
+            (
+            SELECT
+                mpso_payment_method,
+                mpso_scan_code_channel,
+                SUM( mpso_actual_price ) AS paymentPrice
+            FROM
+                sm_merchant_product_sale_order
+            WHERE
+                mpso_is_delete = 0
+                AND mpso_is_refund = 0
+                AND mpso_is_payment = 1
+                AND mpso_sbi_id = #{mpsoSbiId}
+                AND mpso_pay_time >= #{startT}
+                AND #{endT} >= mpso_pay_time
+            GROUP BY
+            mpso_payment_method
+            ) b
+    </select>
+
+    <resultMap id="orderForOwner" type="cn.com.yyxx.yld.supply.data.vo.SmSaleOrderForOwnerVO">
+        <result column="orderStatus" property="orderStatus"/>
+        <result column="statusCode" property="statusCode"/>
+        <result column="singleNo" property="singleNo" />
+        <result column="mpsoOrderTime" property="mpsoOrderTime"/>
+        <result column="payType" property="payType"/>
+        <result column="totalPrice" property="totalPrice" />
+        <result column="actualPrice" property="actualPrice" />
+        <result column="discountPrice" property="discountPrice" />
+        <result column="failResult" property="failResult" />
+        <result column="sbiId" property="sbiId" />
+        <result column="orderNo" property="orderNo" />
+        <collection property="list" ofType="cn.com.yyxx.yld.supply.data.vo.SmOrderDetailForOwnerVO">
+            <id column="id" property="id" />
+            <result column="name" property="name" />
+            <result column="number" property="number" />
+            <result column="price" property="price" />
+            <result column="count" property="count" />
+        </collection>
+    </resultMap>
+
+
+</mapper>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.yyxx.yld.supply.dao.pm.IPmPurchaseOrderInfoDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.com.yyxx.yld.supply.entity.pm.PmPurchaseOrderInfo">
+        <id column="pii_id" property="piiId" />
+        <result column="pii_no" property="piiNo" />
+        <result column="pii_poi_id" property="piiPoiId" />
+        <result column="pii_mpbi_id" property="piiMpbiId" />
+        <result column="pii_category" property="piiCategory" />
+        <result column="pii_product_code" property="piiProductCode" />
+        <result column="pii_bar_code" property="piiBarCode" />
+        <result column="pii_short_pinyin" property="piiShortPinyin" />
+        <result column="pii_short_code" property="piiShortCode" />
+        <result column="pii_name" property="piiName" />
+        <result column="pii_unit" property="piiUnit" />
+        <result column="pii_size" property="piiSize" />
+        <result column="pii_num" property="piiNum" />
+        <result column="pii_num_allow_decimal" property="piiNumAllowDecimal" />
+        <result column="pii_retail_price" property="piiRetailPrice" />
+        <result column="pii_wholesale_price" property="piiWholesalePrice" />
+        <result column="pii_sub_total" property="piiSubTotal" />
+        <result column="pii_expected_payoff" property="piiExpectedPayoff" />
+        <result column="pii_create_time" property="piiCreateTime" />
+        <result column="pii_modify_time" property="piiModifyTime" />
+        <result column="pii_is_delete" property="piiIsDelete" />
+        <result column="pii_sort" property="piiSort" />
+        <result column="pii_description" property="piiDescription" />
+        <result column="pii_remark" property="piiRemark" />
+    </resultMap>
+    <select id="findOrderById" resultType="cn.com.yyxx.yld.supply.entity.pm.PmPurchaseOrderInfo">
+        SELECT
+            a.poi_id AS 'poiId',
+            a.poi_single_no AS 'poiOrderNo',
+            b.tpoi_order_date AS 'tpoiOrderDate',
+            a.poi_row_num AS 'poiRowNum',
+            a.poi_total_num AS 'poiTtotalNum',
+            a.poi_total_account AS 'poiTotalAccount',
+            a.poi_gross_profit AS 'poiGrossProfit',
+            a.poi_is_in AS 'isIn'
+        FROM
+            pm_purchase_order_info a
+                LEFT JOIN pm_tobacco_purchase_order_info b ON a.poi_id = b.tpoi_id
+        WHERE
+           a.poi_is_delete = 0
+          AND a.poi_id = #{poiId}
+          AND a.poi_is_enabled = #{poiIsEnabled}
+          AND a.poi_is_in = #{poiIsIn}
+    </select>
+
+</mapper>
